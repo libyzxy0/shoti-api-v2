@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get a tons and lots of beautiful girl videos randomly, from tiktok.">
+    <meta name="keywords" content="shoti, shoti api, shotiapi, beautiful girl, shoti-api-leaderboards, leaderboard, shoti api leaderboard, shoti api top users">
+    <meta property="og:url" content="https://shoti-api.libyzxy0.repl.co/">
+    <meta property="og:description" content="Get a lots of beautiful girl videos randomly." />
+    <meta property="og:title" content="Shoti API">
+    <meta property="og:image" content="https://shoti-api.libyzxy0.repl.co/logo.png">
+    <meta property="twitter:description" content="Get a lots of beautiful girl videos randomly from tiktok.">
+    <meta property="twitter:title" content="Shoti API">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://shoti-api.libyzxy0.repl.co/logo.png">
+    <title>Shoti API | Leader Board</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-68J6S6STR8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-68J6S6STR8');
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark-dimmed.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
+    <style>
+      * {
+        font-family: 'Comfortaa', cursive;
+      }
+      th {
+        text-align: center;
+      }
+      .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #f5f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+      <nav class="navbar bg-dark w-100">
+      <div class="container">
+        <span class="navbar-brand mb-0 text-light h1">Shoti API Leader Board</span>
+    </nav>
+    <div class="container">
+      <div class="table-responsive">
+    <table class="table mt-3 w-100 table-striped">
+  <thead>
+    <tr>
+      <th class="bg-info text-center" scope="col">Rank</th>
+      <th class="bg-primary text-center" scope="col">Name</th>
+      <th class="bg-danger text-center" scope="col">Requests</th>
+    </tr>
+  </thead>
+  <tbody class="mb-5" id="leaderboard"></tbody>
+</table>
+</div>
+    </div>
+ <footer class="my-4">
+      <ul class="nav border-bottom pb-3 mb-3"></ul>
+      <p class="text-center text-body-secondary mb-0">&copy; Copyright 2023 Shoti API | <a href="https://libyzxy0.netlify.app">libyzxy0</a>. </p>
+   <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><img style="width: 20px;" src="./logo.png" class="rounded me-2" alt="icon"><strong class="me-auto">Shoti-API</strong><small>Last Update: September 3, 2023</small><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Canceled</div></div></div>
+    </footer>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function getRes() {
+      $.ajax({
+	type: "POST",
+	url: "/get/leaderboard",
+	data: JSON.stringify({ data: "leaderboard" }),
+	contentType: "application/json",
+	success: function(response) {
+	 // console.log(JSON.stringify(response));
+	  let count = 1;
+	  for(let i = 0; i < response.length; i++) {
+    //let requests = response[i].requests ? response[i].requests : "N/A";
+    if(response[i].requests != 0) {
+	  let tr = $("<tr>");
+	  let th = $('<th>').text(`${count}`)
+	  let th1 = $('<th>').text(response[i].username)
+	  let th2 = $('<th>').text(response[i].requests)
+	  
+		th.appendTo(tr)
+		th1.appendTo(tr)
+		th2.appendTo(tr)
+		tr.appendTo("#leaderboard");
+		count++;
+     } 
+	  }
+	},
+	error: function(jqXHR, textStatus, errorThrown) {
+		console.error("Error:", textStatus, errorThrown);
+	}
+});
+    } 
+window.onload = getRes;
+  </script>
+    <script>
+const toastLiveExample = document.getElementById('liveToast')
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  bootstrap.Toast.Default.delay = 10000
+  toastBootstrap.show()
+    </script>
+  </body>
+   </html>

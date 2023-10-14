@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get a tons and lots of beautiful girl videos randomly, from tiktok.">
+    <meta name="keywords" content="shoti, shoti api, shotiapi, beautiful girl, shoti-api-documentation, documentation, shoti api documentation">
+    <meta property="og:url" content="https://shoti-api.libyzxy0.repl.co/">
+    <meta property="og:description" content="Get a lots of beautiful girl videos randomly." />
+    <meta property="og:title" content="Shoti API">
+    <meta property="og:image" content="https://shoti-api.libyzxy0.repl.co/logo.png">
+    <meta property="twitter:description" content="Get a lots of beautiful girl videos randomly from tiktok.">
+    <meta property="twitter:title" content="Shoti API">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://shoti-api.libyzxy0.repl.co/logo.pn">
+    <title>Shoti API</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-68J6S6STR8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-68J6S6STR8');
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark-dimmed.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
+    <style>
+      * {
+        font-family: 'Comfortaa', cursive;
+      }
+      code {
+          border-radius: 5px;
+          overflow: auto;
+          white-space: pre-wrap;
+      }
+      ::selection {
+        background-color: #33FF00;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 text-light h1">Shoti API • Documentation</span>
+    </nav>
+    <div class="container mt-4">
+        <h1>Introduction</h1>
+        <p>Shoti API is a API that sending lots of beautiful girl videos from <a href="https://tiktok.com">tiktok.com</a>.</p>
+        <h3 class="mt-4">How it works?</h3>
+        <img class="w-100 h-75" src="flow.png" alt="API Flow"></img>
+        <h1 class="mt-4">Getting Started</h1>
+        <p>Getting started setuping the api.</p>
+        <h4>Node.js</h4>
+        <p class="mt-3">Install axios package</p>
+        <pre><code class="language-javascript">npm i axios</code></pre>
+        <p class="mt-3">Code</p>
+        <pre><code class="language-javascript">const axios = require('axios');
+
+let response = await axios.post('https://shoti-api.libyzxy0.repl.co/api/get-shoti', { apikey: "YOUR-API-KEY" });
+
+console.log(response.data);</code></pre>
+      <p class="mb-4">Note: Replace the apikey, you can get it <a href="/">here</a>.</p>
+      
+<p class="mt-3">Returns this json</p>
+        <pre><code class="language-json">"code": 200,
+  "message": "success",
+  "data": {
+    "url": "https://shoti-api.libyzxy0.repl.co/video-cdn/7236011668839337222",
+    "play": "https://www.tikwm.com//video/media/play/7236011668839337222.mp4",
+    "wmplay": "https://www.tikwm.com//video/media/wmplay/7236011668839337222.mp4",
+    "duration": 13,
+    "id": "lj291fr4z6zmi2uesb"
+  },
+  "user": {
+    "username": "messiany.louis",
+    "nickname": "LIONEL messi♌️",
+    "id": "6745006382338327553"
+  }
+}</code></pre>
+    <h4 class="mb-3 mt-4">Mirai Messenger Bot</h4>
+    <p class="mt-3">Install dependencies</p>
+        <pre><code class="language-javascript">npm i axios request fs</code></pre>
+    <p class="mt-3">Code</p>
+    <pre><code class="language-javascript">module.exports.config = {
+  name: "shoti",
+  version: "1.0.0",
+  credits: "libyzxy0",
+  description: "Generate random tiktok girl videos",
+  hasPermssion: 0,
+  commandCategory: "other",
+  usage: "[shoti]",
+  cooldowns: 5,
+  dependencies: [],
+  usePrefix: true
+};
+
+module.exports.run = async function({ api, event }) {
+  const axios = require("axios");
+  const request = require('request');
+  const fs = require("fs")
+  let response = await axios.post('https://shoti-api.libyzxy0.repl.co/api/get-shoti', { apikey: "YOUR-API-KEY" });
+  var file = fs.createWriteStream(__dirname + "/cache/shoti.mp4");
+  var rqs = request(encodeURI(response.data.data.url));
+  rqs.pipe(file);
+  file.on('finish', () => {
+    return api.sendMessage({
+      body: `@${response.data.user.username}`, 
+      attachment: fs.createReadStream(__dirname + '/cache/shoti.mp4')
+    }, event.threadID, event.messageID)
+  })
+  file.on('error', (err) => {
+      api.sendMessage(`Shoti Error: ${err}`, event.threadID, event.messageID);
+  })
+};</code></pre>
+    </div>
+    <footer class="my-4">
+      <ul class="nav border-bottom pb-3 mb-3"></ul>
+      <p class="text-center text-body-secondary mb-0">&copy; Copyright 2023 Shoti API | <a href="https://libyzxy0.netlify.app">libyzxy0</a>. </p>
+      <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><img style="width: 20px;" src="./logo.png" class="rounded me-2" alt="icon"><strong class="me-auto">Shoti-API</strong><small>Last Update: September 3, 2023</small><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div><div class="toast-body">Canceled.</div></div></div>
+    </footer>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+const toastLiveExample = document.getElementById('liveToast')
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  bootstrap.Toast.Default.delay = 10000
+  toastBootstrap.show()
+    </script>
+  </body>
+</html>

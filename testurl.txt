@@ -1,0 +1,1 @@
+https://shoti-api.libyzxy0.repl.co/api/get-shoti?apikey=shoti-1h7ccntg3mgjvqi8hso

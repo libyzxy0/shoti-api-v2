@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get a lots of beautiful girl videos randomly.">
+    <meta property="og:url" content="Canonical link preview URL">
+    <meta property="og:description" content="Get a lots of beautiful girl videos randomly." />
+    <meta property="og:title" content="Shoti API">
+    <meta property="og:image" content="Link preview image URL">
+    <meta property="twitter:description" content="Get a lots of beautiful girl videos randomly.">
+    <meta property="twitter:title" content="Shoti API">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="Twitter link preview image URL">
+    <title>Shoti API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-68J6S6STR8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-68J6S6STR8');
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark-dimmed.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
+    <style>
+      * {
+        font-family: 'Comfortaa', cursive;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 text-light h1">Shoti API</span>
+    </nav>
+    <div class="container mt-4">
+        <form id="formsubmit">
+        <input class="form-control" type="url" name="url" id="url" placeholder="Enter Url">
+        <button type="submit" class="btn btn-primary w-100 mt-4" id="btn">Submit</button>
+        </form>
+        <p id="txt" class="text-center mt-4">ID...</p>
+    </div>
+    <footer class="my-4">
+      <ul class="nav border-bottom pb-3 mb-3"></ul>
+      <p class="text-center text-body-secondary mb-0">&copy; Copyright 2023 Shoti API | <a href="https://libyzxy0-dev.vercel.app">libyzxy0</a>. </p>
+    </footer>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+  $("#formsubmit").submit(function (event) {
+    event.preventDefault(); 
+    $("#btn").attr("disabled", true);
+    $("#btn").text("Loading")
+    const formData = $(this).serializeArray();
+    let url = formData[0].value;
+    $.ajax({
+	type: "POST",
+	url: "https://shoti-api.libyzxy0.repl.co/api/add-shoti",
+	data: JSON.stringify({ url: url }),
+	contentType: "application/json",
+	success: function(response) {
+    $("#btn").removeAttr("disabled");
+    $("#btn").text("Submit")
+	  $("#txt").text(response.id)
+	},
+	error: function(jqXHR, textStatus, errorThrown) {
+		console.error("Error:", textStatus, errorThrown);
+	}
+});
+$(this)[0].reset();        
+})
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
